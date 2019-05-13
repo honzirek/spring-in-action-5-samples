@@ -24,7 +24,8 @@ public class ActuatorSecurityConfig extends WebSecurityConfigurerAdapter {
         
       .and()
     
-      .httpBasic();
+      .httpBasic()
+      .and().csrf().ignoringAntMatchers("/actuator/**");
     // @formatter:on
   }
   

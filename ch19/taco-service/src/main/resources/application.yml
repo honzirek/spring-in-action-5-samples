@@ -19,7 +19,7 @@ spring:
 #
   cloud:
     config:
-      uri: http://localhost:8888
+      uri: http://config-server:8888
 
 management:
   endpoints:
@@ -38,3 +38,8 @@ info:
   contact:
     email: support@tacocloud.com
     phone: 822-625-6831
+
+logging:
+  level:
+    root: INFO
+  file: /tmp/logs.log

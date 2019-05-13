@@ -1,0 +1,40 @@
+version: '3.3'
+
+services:    
+    service-registry:
+        networks:
+            - my-net
+        build:
+            context: service-registry
+            args:
+                JAR_FILE: target/service-registry-0.0.19-SNAPSHOT.jar
+        dns: 10.62.63.16
+    config-server:
+        networks:
+            - my-net
+        build:
+            context: config-server
+            args:
+                JAR_FILE: target/config-server-0.0.19-SNAPSHOT.jar
+        dns: 10.62.63.16
+        depends_on:
+            - service-registry
+        ports:
+            - 8888
+    taco-service:
+        networks:
+            - my-net
+        build:
+            context: taco-service
+            args:
+                JAR_FILE: target/taco-service-0.0.19-SNAPSHOT.jar
+        dns: 10.62.63.16
+        ports:
+            - 8081
+        depends_on:
+            - service-registry
+            - config-server
+        command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+networks:
+    my-net:
+        
