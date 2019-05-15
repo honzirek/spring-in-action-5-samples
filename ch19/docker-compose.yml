@@ -9,6 +9,10 @@ services:
             args:
                 JAR_FILE: target/service-registry-0.0.19-SNAPSHOT.jar
         dns: 10.62.63.16
+        volumes:
+            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+#        volumes:
+#            - /logs
     config-server:
         networks:
             - my-net
@@ -21,6 +25,8 @@ services:
             - service-registry
         ports:
             - 8888
+        volumes:
+            - "/c/Users/mhonzirek/Downloads/logs:/logs"
     taco-service:
         networks:
             - my-net
@@ -31,10 +37,13 @@ services:
         dns: 10.62.63.16
         ports:
             - 8081
+#        volumes:
+#            - /logs
+        volumes:
+            - "/c/Users/mhonzirek/Downloads/logs:/logs"
         depends_on:
             - service-registry
             - config-server
         command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
 networks:
     my-net:
-        

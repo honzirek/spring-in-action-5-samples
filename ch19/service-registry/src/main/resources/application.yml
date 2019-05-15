@@ -12,6 +12,11 @@ eureka:
   server:
     enable-self-preservation: false
 
+logging:
+  level:
+    root: INFO
+  file: /logs/logs-service-registry.log
+
 #
 # Uncomment if you'd rather use multi-peer Eureka with the eureka-1 and eureka-2 
 # profiles below (see Listing 13.1)

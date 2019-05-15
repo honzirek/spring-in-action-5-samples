@@ -42,4 +42,4 @@ info:
 logging:
   level:
     root: INFO
-  file: /tmp/logs.log
+  file: /logs/logs-taco-service.log
