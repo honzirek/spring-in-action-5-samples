@@ -3,4 +3,5 @@ spring:
     name: taco-service
   cloud:
     config:
+      token: myroot
       uri: http://config-server:8888

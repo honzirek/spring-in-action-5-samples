@@ -9,11 +9,22 @@ server:
 # data, but if you want to play around and tweak the configuration, you'll
 # need to setup your own configuration repository (or fork mine). 
 spring:
+  profiles:
+    active:
+      - vault
+      - git
   cloud:
     config:
       server:
         git:
           uri: http://gogs:3000/honzimar/tacocloud-config.git
+          order: 2
+        vault:
+          host: vault
+          port: 8200
+          order: 1
+          scheme: http
+          kv-version: 2
   rabbitmq:
     host: some-rabbit
     port: 5672
