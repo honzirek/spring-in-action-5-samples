@@ -112,5 +112,27 @@ services:
             - service-registry
             - config-server
         command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+    hystrix-dashboard:
+        networks:
+            - my-net
+        build:
+            context: hystrix-dashboard
+            args:
+                JAR_FILE: target/hystrix-dashboard-0.0.19-SNAPSHOT.jar
+        dns: 10.62.63.16
+        ports:
+            - 8080
+            - 8000
+            - 7979
+        #        volumes:
+        #            - /logs
+        volumes:
+            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        environment:
+            - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+        depends_on:
+            - service-registry
+            - config-server
+        command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
 networks:
     my-net:

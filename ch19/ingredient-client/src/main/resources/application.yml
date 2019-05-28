@@ -30,3 +30,17 @@ info:
   contact:
     email: support@tacocloud.com
     phone: 822-625-6831
+
+feign:
+  hystrix:
+    enabled: true
+
+hystrix:
+  command:
+    default:
+      metrics:
+        rollingStats:
+          timeInMilliseconds: 10000
+      circuitBreaker:
+          requestVolumeThreshold: 4
+

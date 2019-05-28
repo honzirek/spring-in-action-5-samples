@@ -1,6 +1,7 @@
 package tacos.ingredientclient.feign;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 @Profile("feign")
 @Slf4j
 @EnableFeignClients
+@EnableCircuitBreaker
 public class FeignClientConfig {
   
   @Bean

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import tacos.ingredientclient.Ingredient;
 
-@FeignClient("ingredient-service")
+@FeignClient(name = "ingredient-service", fallbackFactory = HystrixClientFallbackFactory.class)
 public interface IngredientClient {
 
   @GetMapping("/ingredients/{id}")
