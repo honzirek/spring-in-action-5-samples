@@ -20,4 +20,4 @@ To fix the errors, simply install Lombok. Lombok has support for most common (an
 
 *Info*
 
-image::CH19_Gogs_Vault_Config.png
+image::CH19_Gogs_Vault_Config.png[]
