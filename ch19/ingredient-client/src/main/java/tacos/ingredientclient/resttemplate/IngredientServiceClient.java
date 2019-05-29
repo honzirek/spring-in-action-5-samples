@@ -26,10 +26,10 @@ public class IngredientServiceClient {
     this.rest = rest;
   }
   
-  @HystrixCommand(fallbackMethod="getDefaultIngredientDetails")
+  //@HystrixCommand(fallbackMethod="getDefaultIngredientDetails")
   public Ingredient getIngredientById(String ingredientId) {
     return rest.getForObject(
-        "http://ingredient-service/ingredients/{id}", 
+        "https://ingredient-service/ingredients/{id}",
         Ingredient.class, ingredientId);
   }
   
@@ -43,29 +43,29 @@ public class IngredientServiceClient {
     }
   }
   
-  @HystrixCommand(fallbackMethod="getDefaultIngredients",
-      commandProperties={
-          @HystrixProperty(
-              name="execution.isolation.thread.timeoutInMilliseconds",
-              value="500"),
-              @HystrixProperty(
-                  name="circuitBreaker.requestVolumeThreshold",
-                  value="30"),
-              @HystrixProperty(
-                  name="circuitBreaker.errorThresholdPercentage",
-                  value="25"),
-              @HystrixProperty(
-                  name="metrics.rollingStats.timeInMilliseconds",
-                  value="20000"),
-              @HystrixProperty(
-                  name="circuitBreaker.sleepWindowInMilliseconds",
-                  value="60000")
-      })
+//  @HystrixCommand(fallbackMethod="getDefaultIngredients",
+//      commandProperties={
+//          @HystrixProperty(
+//              name="execution.isolation.thread.timeoutInMilliseconds",
+//              value="500"),
+//              @HystrixProperty(
+//                  name="circuitBreaker.requestVolumeThreshold",
+//                  value="30"),
+//              @HystrixProperty(
+//                  name="circuitBreaker.errorThresholdPercentage",
+//                  value="25"),
+//              @HystrixProperty(
+//                  name="metrics.rollingStats.timeInMilliseconds",
+//                  value="20000"),
+//              @HystrixProperty(
+//                  name="circuitBreaker.sleepWindowInMilliseconds",
+//                  value="60000")
+//      })
   public Iterable<Ingredient> getAllIngredients() {
     ParameterizedTypeReference<List<Ingredient>> stringList =
         new ParameterizedTypeReference<List<Ingredient>>() {};
     return rest.exchange(
-        "http://ingredient-service/ingredients", HttpMethod.GET,
+        "https://ingredient-service/ingredients", HttpMethod.GET,
         HttpEntity.EMPTY, stringList).getBody();
   }
 

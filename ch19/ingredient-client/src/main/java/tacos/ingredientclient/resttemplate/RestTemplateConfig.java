@@ -9,10 +9,26 @@ import org.springframework.web.client.RestTemplate;
 
 import lombok.extern.slf4j.Slf4j;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSession;
+
 @Configuration
 @Conditional(NotFeignAndNotWebClientCondition.class)
 @Slf4j
 public class RestTemplateConfig {
+
+  static {
+    HttpsURLConnection.setDefaultHostnameVerifier(
+            new HostnameVerifier() {
+              @Override
+              public boolean verify(final String hostname, final SSLSession session) {
+                System.out.println("verifying: " + hostname);
+                return true;
+              }
+            }
+    );
+  }
 
   @Bean
   @LoadBalanced
