@@ -1,3 +1,12 @@
+== GENERATE CERT
+
+https://developer.okta.com/blog/2019/03/07/spring-microservices-https-oauth2
+
+* Download mkcert binary for Windows:
+  * mkcert-v1.3.0-windows-amd64.exe localhost 127.0.0.1 ::1 ingredient-service ingredient-client service-registry 192.168.99.100
+* Download openssl binary for Windows:
+  * openssl pkcs12 -export -in localhost.pem -inkey localhost-key.pem -out keystore.p12 -name bootifulsecurity
+
 *Structure*
 
 * ch19 - docker-compose example
