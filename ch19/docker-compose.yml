@@ -11,8 +11,8 @@ services:
         dns: 10.62.63.16
         env_file:
           - .env
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
 #        volumes:
 #            - /logs
     config-server:
@@ -29,8 +29,8 @@ services:
           - .env
         ports:
             - 8888
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
     taco-service:
         networks:
             - my-net
@@ -44,8 +44,8 @@ services:
             - 8000
 #        volumes:
 #            - /logs
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         depends_on:
@@ -67,8 +67,8 @@ services:
         #            - /logs
         #env_file:
         #    - .env
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         depends_on:
@@ -88,8 +88,8 @@ services:
             - 8000
         #        volumes:
         #            - /logs
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         #    - SPRING_PROFILES_ACTIVE=feign
@@ -110,8 +110,8 @@ services:
             - 8000
         #        volumes:
         #            - /logs
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         depends_on:
@@ -132,13 +132,13 @@ services:
             - 7979
         #        volumes:
         #            - /logs
-        volumes:
-            - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         depends_on:
             - service-registry
             - config-server
-        command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+        #command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
 networks:
     my-net:

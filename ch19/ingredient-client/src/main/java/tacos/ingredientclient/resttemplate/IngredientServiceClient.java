@@ -26,7 +26,7 @@ public class IngredientServiceClient {
     this.rest = rest;
   }
   
-  //@HystrixCommand(fallbackMethod="getDefaultIngredientDetails")
+  @HystrixCommand(fallbackMethod="getDefaultIngredientDetails")
   public Ingredient getIngredientById(String ingredientId) {
     return rest.getForObject(
         "https://ingredient-service/ingredients/{id}",
@@ -43,24 +43,24 @@ public class IngredientServiceClient {
     }
   }
   
-//  @HystrixCommand(fallbackMethod="getDefaultIngredients",
-//      commandProperties={
-//          @HystrixProperty(
-//              name="execution.isolation.thread.timeoutInMilliseconds",
-//              value="500"),
-//              @HystrixProperty(
-//                  name="circuitBreaker.requestVolumeThreshold",
-//                  value="30"),
-//              @HystrixProperty(
-//                  name="circuitBreaker.errorThresholdPercentage",
-//                  value="25"),
-//              @HystrixProperty(
-//                  name="metrics.rollingStats.timeInMilliseconds",
-//                  value="20000"),
-//              @HystrixProperty(
-//                  name="circuitBreaker.sleepWindowInMilliseconds",
-//                  value="60000")
-//      })
+  @HystrixCommand(fallbackMethod="getDefaultIngredients",
+      commandProperties={
+          @HystrixProperty(
+              name="execution.isolation.thread.timeoutInMilliseconds",
+              value="500"),
+              @HystrixProperty(
+                  name="circuitBreaker.requestVolumeThreshold",
+                  value="30"),
+              @HystrixProperty(
+                  name="circuitBreaker.errorThresholdPercentage",
+                  value="25"),
+              @HystrixProperty(
+                  name="metrics.rollingStats.timeInMilliseconds",
+                  value="20000"),
+              @HystrixProperty(
+                  name="circuitBreaker.sleepWindowInMilliseconds",
+                  value="60000")
+      })
   public Iterable<Ingredient> getAllIngredients() {
     ParameterizedTypeReference<List<Ingredient>> stringList =
         new ParameterizedTypeReference<List<Ingredient>>() {};
