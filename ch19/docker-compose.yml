@@ -51,7 +51,7 @@ services:
         depends_on:
             - service-registry
             - config-server
-        command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+        #command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
     ingredient-service:
         networks:
             - my-net

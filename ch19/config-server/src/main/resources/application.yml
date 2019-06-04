@@ -23,8 +23,7 @@ spring:
           host: vault
           port: 8200
           order: 1
-          scheme: http
-          kv-version: 2
+          default-label: http_test
   rabbitmq:
     host: some-rabbit
     port: 5672
