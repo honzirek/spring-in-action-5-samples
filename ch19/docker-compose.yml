@@ -10,7 +10,7 @@ services:
                 JAR_FILE: target/service-registry-0.0.19-SNAPSHOT.jar
         dns: 10.62.63.16
         env_file:
-          - .env
+          - run.env
         #volumes:
         #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
 #        volumes:
@@ -25,8 +25,8 @@ services:
         dns: 10.62.63.16
         depends_on:
             - service-registry
-        env_file:
-          - .env
+        #env_file:
+        #  - run.env
         ports:
             - 8888
         #volumes:
@@ -51,6 +51,8 @@ services:
         depends_on:
             - service-registry
             - config-server
+        env_file:
+            - run.env
         #command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
     ingredient-service:
         networks:
@@ -65,10 +67,10 @@ services:
             - 8000
         #        volumes:
         #            - /logs
-        #env_file:
-        #    - .env
         #volumes:
         #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        env_file:
+            - run.env
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         depends_on:
@@ -93,6 +95,8 @@ services:
         environment:
             - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
         #    - SPRING_PROFILES_ACTIVE=feign
+        env_file:
+            - run.env
         depends_on:
             - service-registry
             - config-server
@@ -139,6 +143,8 @@ services:
         depends_on:
             - service-registry
             - config-server
+        env_file:
+            - run.env
         #command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
 networks:
     my-net:
