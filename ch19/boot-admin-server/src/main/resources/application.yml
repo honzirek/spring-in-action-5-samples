@@ -2,7 +2,26 @@ server:
   port: 9090
 
 spring:
+  application:
+    name: boot-admin-server
   security:
     user:
       name: admin
       password: 53cr3t
+
+eureka:
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: https://service-registry:8761/eureka/
+  instance:
+#    hostname: service-registry
+    secure-port-enabled: true
+#    secure-port: ${server.port}
+#    status-page-url: https://${eureka.hostname}:${server.port}/actuator/info
+#    health-check-url: https://${eureka.hostname}:${server.port}/actuator/health
+#    home-page-url: https://${eureka.hostname}${server.port}/
+
+logging:
+  level:
+    root: INFO

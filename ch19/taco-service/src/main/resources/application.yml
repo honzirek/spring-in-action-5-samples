@@ -1,14 +1,12 @@
 spring:
   application:
     name: taco-service
-  boot:
-    admin:
-      client:
-        url: http://localhost:9090
-        instance:
-          metadata:
-            user.name: admin
-            user.password: password
+
+eureka:
+  instance:
+    metadata-map:
+      user.name: admin
+      user.password: password
 
 #
 # Note that the config server URI configured here is different than the one that

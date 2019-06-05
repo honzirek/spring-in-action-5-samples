@@ -11,6 +11,8 @@ services:
         dns: 10.62.63.16
         env_file:
           - run.env
+        ports:
+            - 8761
         #volumes:
         #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
 #        volumes:
@@ -146,5 +148,28 @@ services:
         env_file:
             - run.env
         #command: ["./wait-for-it.sh", "config-server:8888", "-t", "45", "--", "java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/app.jar"]
+    boot-admin-server:
+        networks:
+            - my-net
+        build:
+            context: boot-admin-server
+            args:
+                JAR_FILE: target/boot-admin-server-0.0.19-SNAPSHOT.jar
+        dns: 10.62.63.16
+        ports:
+            - 8080
+            - 8000
+            - 9090
+        #        volumes:
+        #            - /logs
+        #volumes:
+        #    - "/c/Users/mhonzirek/Downloads/logs:/logs"
+        env_file:
+            - run.env
+        environment:
+            - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+        depends_on:
+            - service-registry
+            - config-server
 networks:
     my-net:
